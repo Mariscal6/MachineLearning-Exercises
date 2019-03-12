@@ -1,0 +1,7 @@
+,Nombre,Sexo,Edad,Pais,Clase
+0,Miguel,Hombre,34.0,España,A
+1,Javier,Hombre,23.0,Brasil,B
+2,Ana,Mujer,40.0,Italia,A
+3,Pablo,Hombre,,USA,C
+4,Eva,Mujer,23.0,Italia,A
+5,Esteban,Hombre,-2.0,Argentina,B

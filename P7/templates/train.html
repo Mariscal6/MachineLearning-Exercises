@@ -1,0 +1,79 @@
+<html>
+<head>
+      <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>	
+	
+<body>
+      <form action = "/train" method = "post">
+         <p>Vamos a entrenar el sistema!!</p>
+         <p>Introduce tu nombre de usuario y la frase "tres tristes tigres"</p>
+	 <p><input id="login" name="login" type="text" /></p>
+         <p><input id="frase" name="frase" type="text" /></p>
+	<input type="button" value="Volver" onclick="window.location.href='/'">
+	 <p><input id="onflytime" name="onflytime" type="hidden" value = {{myOp.flytime}} /></p>
+	 <p><input id="pressedtime" name="pressedtime" type="hidden" value = {{myOp.pressedtime}} /></p>
+	 <p><input id="keytimes" name="keytimes" type="hidden" value = {{myOp.keytimes}} /></p>
+      </form>
+
+
+<script>
+var trestt = "tres tristes tigres";
+var keytimes = "";
+var ini = true;
+var currentword = 0;
+var onflytime = 0;
+var pressedtime = 0;
+var previoustime = 0;
+var previouspressedtime = 0;
+
+$("#frase").keydown(function(event){
+
+	if((currentword == trestt.length) && (event.which == 13)){
+	$("#keytimes").val(keytimes);
+	$("#pressedtime").val(pressedtime);
+	$("#onflytime").val(onflytime);
+	$("form").submit();
+	}
+
+	if(String.fromCharCode(event.which).toLowerCase() 
+		== trestt.charAt(currentword)){
+
+	//Medicion de tiempo de vuelo y entre tecla
+		if(!ini){
+			onflytime += event.timeStamp - previoustime;
+			keytimes += (event.timeStamp - previoustime) + "-"
+		}else{
+			previoustime = event.timeStamp;
+			ini = false;
+		}
+	//Medición de tiempo que se mantienen pulsadas
+
+		previouspressedtime = event.timeStamp;
+	currentword++;
+	}else{
+	return false;
+	}	
+
+});
+
+$("#frase").keyup(function(event){
+ 
+	
+	if(String.fromCharCode(event.which).toLowerCase() 
+		== trestt.charAt(currentword - 1)){
+ 	
+
+		//Medición de tiempo que se mantienen pulsadas
+		pressedtime += event.timeStamp - previouspressedtime;
+	
+	}
+	else{
+	return false;
+	}	
+	
+});
+
+</script>
+
+</body>
+</html>

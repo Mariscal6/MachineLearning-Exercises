@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>keypress demo</title>
+  <style>
+  fieldset {
+    margin-bottom: 1em;
+  }
+  input {
+    display: block;
+    margin-bottom: .25em;
+  }
+  #print-output {
+    width: 100%;
+  }
+  .print-output-line {
+    white-space: pre;
+    padding: 5px;
+    font-family: monaco, monospace;
+    font-size: .7em;
+  }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+ 
+<form>
+  <fieldset>
+    <label for="target">Type Something:</label>
+    <input id="target" type="text">
+  </fieldset>
+  <fieldset>
+    <label for="key">Timestamp:</label>
+    <input id="key" type="text">
+  </fieldset>
+
+</form>
+
+<script>
+$( "#target" ).keypress(function( event ) {
+  console.log(event);
+  if ( event.which == 13 ) {
+     event.preventDefault();
+  }
+  $("#key").val(event.timeStamp);
+});
+ 
+
+</script>
+ 
+</body>
+</html>
